@@ -1,0 +1,30 @@
+#! /usr/local/bin/logo
+
+; The starklatin proecedure translates a word to stark latin
+to starklatin :word
+if punctuationp last :word [op word starklatin.real butlast :word last :word]
+op starklatin.real :word
+end
+
+to starklatin.real :word
+; If the word starts with a vowel, just put "ark" on the end of it
+if vowelp first :word [op word :word "ark]
+
+; If the word doesn't start with a vowel, move the first letter to the end of the word
+; then check again to see if the first letter is a vowel.
+op starklatin.real word butfirst :word first :word
+end
+
+; Check to see if the given letter is a vowel or not
+to vowelp :letter
+op memberp :letter [a e i o u]
+end
+
+; Check to see if the given letter is puncutation or not
+to punctuationp :letter
+op memberp :letter [. , ? !]
+end
+
+to translate :sentence
+print map "starklatin :sentence
+end
